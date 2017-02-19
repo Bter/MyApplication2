@@ -1,6 +1,7 @@
 package com.example.qiqian.myapplication2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,10 +11,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.xmlpull.v1.XmlPullParser;
+import com.example.qiqian.mylibrary.TestJava;
 
-public class MainActivity extends AppCompatActivity {
-    private View view;
+public class MainActivity extends AppCompatActivity implements BaseInterface{
+    private View mView;
+    private String name;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -39,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
+
+        initView();
+    }
+
+    private void initView() {
+        mView = null;
+
+        MyTestCalss testCalss = new MyTestCalss();
+        testCalss.getValues();
+
+        for (int step = 0; step < 10; step++) {
+            Log.i(TAG, "initView: "+step);
+        }
+        TestJava testJava = new TestJava();
     }
 
     @Override
